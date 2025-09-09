@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>وبسایت نمونه — آموزش و دوره‌ها</title>
+
+  <!-- فونت فارسی Vazirmatn -->
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:"Vazirmatn","Tahoma","Arial",sans-serif;
+      min-height:100vh;
+      color:#fff;
+      overflow-x:hidden;
+      background:linear-gradient(180deg,#06223a 0%,#0b3b55 40%,#0f6b86 100%);
+      position:relative
+    }
+    .bg-waves,.bg-overlay{position:fixed;inset:0;pointer-events:none;z-index:0}
+    .bg-waves{opacity:.95}
+    .bg-overlay{background-image:linear-gradient(135deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:24px 24px;mix-blend-mode:overlay;opacity:.08}
+    .topbar{display:flex;justify-content:center;align-items:center;padding:18px 24px;position:relative;z-index:10;backdrop-filter:blur(8px) saturate(120%);background:linear-gradient(to bottom,rgba(7,24,34,.45),rgba(7,24,34,.12))}
+    .hamburger{position:absolute;left:16px;top:12px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:10px;background:rgba(255,255,255,.03);box-shadow:0 8px 30px rgba(2,10,20,.5)}
+    .hamburger span,.hamburger span::before,.hamburger span::after{display:block;width:22px;height:2px;background:#fff;border-radius:2px;content:"";position:relative}
+    .hamburger span::before{position:absolute;top:-7px;left:0}
+    .hamburger span::after{position:absolute;top:7px;left:0}
+    .nav{display:flex;gap:28px;list-style:none;font-size:18px}
+    .nav-item{cursor:pointer;color:rgba(255,255,255,.95);font-weight:500;transition:.2s}
+    .nav-item:hover{color:#ff3b3b;font-weight:700;transform:scale(.92)}
+    .drawer{position:fixed;top:0;left:0;height:100%;width:320px;background:rgba(10,20,30,.95);backdrop-filter:blur(10px);transform:translateX(-100%);transition:.3s;z-index:60;padding:28px 18px}
+    .drawer.open{transform:translateX(0)}
+    .drawer h3{margin-bottom:16px}
+    .drawer a{display:block;padding:10px;margin:6px 0;border-radius:8px;text-decoration:none;color:#fff;transition:.2s}
+    .drawer a:hover{background:rgba(255,255,255,.08)}
+    .hero{display:flex;align-items:center;justify-content:center;min-height:calc(100vh - 86px);text-align:center;z-index:11;position:relative;flex-direction:column}
+    .hero h1{font-size:48px;text-shadow:0 8px 44px rgba(2,8,14,.7);opacity:1;transition:opacity 1.5s ease}
+    .hero h1.fade-out{opacity:0}
+    .center-phone{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.85);z-index:100;opacity:0;pointer-events:none;transition:opacity .6s ease}
+    .center-phone.visible{opacity:1;pointer-events:auto}
+    .center-phone span{font-size:42px;font-weight:800;letter-spacing:3px;animation:typing 2s steps(11,end);white-space:nowrap}
+    @keyframes typing{from{width:0}to{width:100%}}
+
+    /* خورشید و نور */
+    .sun-container{position:absolute;top:100px;left:50%;transform:translateX(-50%);z-index:5;display:flex;justify-content:center;align-items:center;flex-direction:column}
+    .sun{width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at center,#fff9c4,#ffe082,#ffca28,#ffb300);box-shadow:0 0 120px 50px rgba(255,220,120,.6);animation:spin 30s linear infinite, pulse 4s ease-in-out infinite}
+    @keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+    @keyframes pulse{0%,100%{box-shadow:0 0 120px 50px rgba(255,220,120,.5);}50%{box-shadow:0 0 150px 70px rgba(255,230,150,.8);}}
+    .sunlight{width:100vw;height:500px;background:radial-gradient(circle at center,rgba(255,220,150,.25),transparent 70%);margin-top:-60px;animation:glow 6s ease-in-out infinite}
+    @keyframes glow{0%,100%{opacity:.6;}50%{opacity:.9;}}
+
+    /* کارت دوره‌ها */
+    .courses{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;padding:40px;z-index:15;position:relative}
+    .course-card{background:rgba(255,255,255,0.1);border-radius:16px;padding:20px;text-align:center;box-shadow:0 8px 20px rgba(0,0,0,0.3);transition:.3s}
+    .course-card:hover{transform:translateY(-6px);background:rgba(255,255,255,0.15)}
+    .course-card img{width:100px;height:100px;object-fit:contain;margin-bottom:16px}
+    .course-card h2{font-size:22px;color:#fff}
+  </style>
+</head>
+<body>
+  <div class="bg-waves">
+    <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice">
+      <defs>
+        <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#0ea5d8" stop-opacity=".14"/><stop offset="1" stop-color="#0369a1" stop-opacity=".12"/></linearGradient>
+        <linearGradient id="g2" x1="0" x2="1"><stop offset="0" stop-color="#074569" stop-opacity=".2"/><stop offset="1" stop-color="#082f49" stop-opacity:.16"/></linearGradient>
+      </defs>
+      <g transform="translate(0,220)"><path d="M0,320 C260,220 420,380 820,300 C1220,220 1400,360 1600,300 L1600,900 L0,900 Z" fill="url(#g1)"/></g>
+      <g transform="translate(0,300)"><path d="M0,360 C260,260 420,420 820,340 C1220,260 1400,400 1600,340 L1600,900 L0,900 Z" fill="url(#g2)"/></g>
+    </svg>
+  </div>
+  <div class="bg-overlay"></div>
+
+  <div class="topbar">
+    <ul class="nav">
+      <li class="nav-item" id="home">خانه</li>
+      <li class="nav-item" id="desk">میز کار</li>
+      <li class="nav-item" id="schedule">برنامه‌ریزی</li>
+      <li class="nav-item" id="phone">شماره تماس</li>
+    </ul>
+    <div class="hamburger" id="hambtn"><span></span></div>
+  </div>
+
+  <aside class="drawer" id="drawer">
+    <h3>منوی آموزش</h3>
+    <a href="https://faradars.org/videos/icdl-skills-and-applications-fvtgs11153" target="_blank">ICDL</a>
+    <a href="https://faradars.org/how-to-learn/image-and-video-processing" target="_blank">پردازش تصویر</a>
+    <a href="https://faradars.org/courses/fvmth103-general-mathematics-ii" target="_blank">ریاضی</a>
+    <hr style="margin:12px 0;border:none;border-top:1px solid rgba(255,255,255,0.2)">
+    <a href="#" id="closeDrawer">بستن منو</a>
+  </aside>
+
+  <div class="sun-container">
+    <div class="sun"></div>
+    <div class="sunlight"></div>
+  </div>
+
+  <main class="hero"><h1 id="welcome">خوش آمدید</h1></main>
+
+  <section class="courses">
+    <div class="course-card">
+      <img src="https://img.icons8.com/fluency/100/math-book.png" alt="کتاب ریاضی">
+      <h2>ریاضی</h2>
+    </div>
+    <div class="course-card">
+      <img src="https://img.icons8.com/fluency/100/microscope.png" alt="علوم">
+      <h2>علوم</h2>
+    </div>
+  </section>
+
+  <div class="center-phone" id="centerPhone"><span id="phoneText"></span></div>
+
+  <script>
+    const hambtn=document.getElementById('hambtn'),drawer=document.getElementById('drawer');
+    const closeDrawer=document.getElementById('closeDrawer');
+    hambtn.onclick=()=>drawer.classList.toggle('open');
+    closeDrawer.onclick=()=>drawer.classList.remove('open');
+
+    const welcome=document.getElementById('welcome');
+    setTimeout(()=>welcome.classList.add('fade-out'),2000);
+
+    const phoneItem=document.getElementById('phone');
+    const centerPhone=document.getElementById('centerPhone');
+    const phoneText=document.getElementById('phoneText');
+    const phoneNumber='09391069810';
+
+    phoneItem.onclick=()=>{
+      phoneText.textContent='';
+      centerPhone.classList.add('visible');
+      let i=0;const interval=setInterval(()=>{
+        phoneText.textContent+=phoneNumber[i++]||'';
+        if(i>phoneNumber.length)clearInterval(interval);
+      },150);
+    };
+
+    centerPhone.onclick=()=>{
+      centerPhone.classList.remove('visible');
+      phoneText.textContent='';
+    };
+  </script>
+</body>
+</html>
